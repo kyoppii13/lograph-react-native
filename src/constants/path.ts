@@ -1,0 +1,10 @@
+export const INITIAL = "INITIAL";
+export const SIGN_UP = "SIGN_UP";
+export const SIGN_IN = "SIGN_IN";
+export const LOADING = "LOADING";
+export const CATEGORY_LIST = "CATEGORY_LIST";
+export const CATEGORY_INPUT = "CATEGORY_INPUT";
+export const CATEGORY_DETAIL = "CATEGORY";
+export const LOG_LIST = "LOG_LIST";
+export const LOG_INPUT = "LOG_INPUT";
+export const LOG_DETAIL = "LOG";
