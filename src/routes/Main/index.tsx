@@ -28,6 +28,17 @@ const forFade = ({ current }: StackCardInterpolationProps) => ({
     opacity: current.progress,
   },
 });
+const getActiveRouteName = (state: any): string => {
+  if (!state || !state.routes) {
+    return "";
+  }
+  const route = state.routes[state.index];
+  // TODO: なぜ再帰?
+  if (route.state) {
+    return getActiveRouteName(route.state);
+  }
+  return route.name;
+};
 function CategoryListWithDrawer() {
   return (
     <CategoryListDrawer.Navigator initialRouteName={CATEGORY_LIST}>
@@ -50,7 +61,15 @@ function LogListWithDrawer() {
 
 function TabRoutes() {
   return (
-    <Tab.Navigator initialRouteName={CATEGORY_LIST}>
+    <Tab.Navigator
+      initialRouteName={CATEGORY_LIST}
+      screenOptions={(props: any) => {
+        const routeName = getActiveRouteName(props.route.state);
+        return {
+          tabBarVisible: routeName !== USER_INFO,
+        };
+      }}
+    >
       <Tab.Screen name={CATEGORY_LIST} component={CategoryListWithDrawer} />
       <Tab.Screen name={LOG_LIST} component={LogListWithDrawer} />
     </Tab.Navigator>
