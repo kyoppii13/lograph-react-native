@@ -6,3 +6,5 @@ export { default as LogList } from "./LogList";
 export { default as CategoryDetail } from "./CategoryDetail";
 export { default as LogDetail } from "./LogDetail";
 export { default as UserInfo } from "./UserInfo";
+export { default as LogInput } from "./LogInput";
+export { default as CategoryInput } from "./CategoryInput";

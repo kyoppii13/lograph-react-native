@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { CATEGORY_DETAIL } from "../../../constants/path";
+import { CATEGORY_DETAIL, CATEGORY_INPUT } from "../../../constants/path";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,6 +18,9 @@ export default function CategoryList() {
       <Text>CategoryList</Text>
       <TouchableOpacity onPress={() => navigate(CATEGORY_DETAIL)}>
         <Text>Go to Detail</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigate(CATEGORY_INPUT)}>
+        <Text>Go to Input</Text>
       </TouchableOpacity>
     </View>
   );
