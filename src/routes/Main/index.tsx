@@ -10,16 +10,11 @@ import {
   SIGN_UP,
   LOG_LIST,
 } from "../../constants/path";
-import {
-  Initial,
-  Loading,
-  CategoryList,
-  SignUp,
-  LogList,
-} from "../../components/pages";
+import { Initial, Loading, SignUp } from "../../components/pages";
 import * as UiContext from "../../contexts/ui";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import LogList from "./LogList";
+import CategoryList from "./CategoryList";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const forFade = ({ current }: StackCardInterpolationProps) => ({

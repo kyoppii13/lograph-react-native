@@ -1,5 +1,7 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { LOG_DETAIL } from "../../../constants/path";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,9 +12,13 @@ const styles = StyleSheet.create({
 });
 
 export default function LogList() {
+  const { navigate } = useNavigation();
   return (
     <View style={styles.container}>
       <Text>LogList</Text>
+      <TouchableOpacity onPress={() => navigate(LOG_DETAIL)}>
+        <Text>Go to Detail</Text>
+      </TouchableOpacity>
     </View>
   );
 }
