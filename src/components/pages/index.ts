@@ -5,3 +5,4 @@ export { default as SignUp } from "./SignUp";
 export { default as LogList } from "./LogList";
 export { default as CategoryDetail } from "./CategoryDetail";
 export { default as LogDetail } from "./LogDetail";
+export { default as UserInfo } from "./UserInfo";

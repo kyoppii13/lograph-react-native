@@ -8,3 +8,4 @@ export const CATEGORY_DETAIL = "CATEGORY_DETAIL";
 export const LOG_LIST = "LOG_LIST";
 export const LOG_INPUT = "LOG_INPUT";
 export const LOG_DETAIL = "LOG_DETAIL";
+export const USER_INFO = "USER_INFO";

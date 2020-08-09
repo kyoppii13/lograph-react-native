@@ -9,25 +9,50 @@ import {
   CATEGORY_LIST,
   SIGN_UP,
   LOG_LIST,
+  USER_INFO,
 } from "../../constants/path";
 import { Initial, Loading, SignUp } from "../../components/pages";
 import * as UiContext from "../../contexts/ui";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import LogList from "./LogList";
 import CategoryList from "./CategoryList";
+import UserInfo from "./UserInfo";
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const CategoryListDrawer = createDrawerNavigator();
+const LogListDrawer = createDrawerNavigator();
 const forFade = ({ current }: StackCardInterpolationProps) => ({
   cardStyle: {
     opacity: current.progress,
   },
 });
+function CategoryListWithDrawer() {
+  return (
+    <CategoryListDrawer.Navigator initialRouteName={CATEGORY_LIST}>
+      <CategoryListDrawer.Screen
+        name={CATEGORY_LIST}
+        component={CategoryList}
+      />
+      <CategoryListDrawer.Screen name={USER_INFO} component={UserInfo} />
+    </CategoryListDrawer.Navigator>
+  );
+}
+function LogListWithDrawer() {
+  return (
+    <LogListDrawer.Navigator initialRouteName={LOG_LIST}>
+      <LogListDrawer.Screen name={LOG_LIST} component={LogList} />
+      <LogListDrawer.Screen name={USER_INFO} component={UserInfo} />
+    </LogListDrawer.Navigator>
+  );
+}
 
 function TabRoutes() {
   return (
     <Tab.Navigator initialRouteName={CATEGORY_LIST}>
-      <Tab.Screen name={CATEGORY_LIST} component={CategoryList} />
-      <Tab.Screen name={LOG_LIST} component={LogList} />
+      <Tab.Screen name={CATEGORY_LIST} component={CategoryListWithDrawer} />
+      <Tab.Screen name={LOG_LIST} component={LogListWithDrawer} />
     </Tab.Navigator>
   );
 }
