@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { LOG_INPUT } from "../../../constants/path";
+import { Context, Status } from "../../../contexts/ui";
 
 const styles = StyleSheet.create({
   container: {
@@ -11,13 +10,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function LogDetail() {
-  const { navigate } = useNavigation();
+export default function SignIn() {
+  const { setApplicationState } = React.useContext(Context);
   return (
     <View style={styles.container}>
-      <Text>LogDetail</Text>
-      <TouchableOpacity onPress={() => navigate(LOG_INPUT)}>
-        <Text>LogInput</Text>
+      <Text>SignIn</Text>
+      <TouchableOpacity onPress={() => setApplicationState(Status.AUTHORIZED)}>
+        <Text>SignIn</Text>
       </TouchableOpacity>
     </View>
   );

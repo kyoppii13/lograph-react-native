@@ -8,6 +8,7 @@ import {
   LOADING,
   CATEGORY_LIST,
   SIGN_UP,
+  SIGN_IN,
   LOG_LIST,
   USER_INFO,
   LOG_INPUT,
@@ -17,6 +18,7 @@ import {
   Initial,
   Loading,
   SignUp,
+  SignIn,
   LogInput,
   CategoryInput,
 } from "../../components/pages";
@@ -29,6 +31,7 @@ import UserInfo from "./UserInfo";
 
 const Stack = createStackNavigator();
 const ModalStack = createStackNavigator();
+const ChooseLoginStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const CategoryListDrawer = createDrawerNavigator();
 const LogListDrawer = createDrawerNavigator();
@@ -87,16 +90,24 @@ function TabRoutes() {
 function TabWithModalRoutes() {
   return (
     <ModalStack.Navigator mode="modal" headerMode="none">
-      <Stack.Screen name={CATEGORY_LIST} component={TabRoutes} />
-      <Stack.Screen name={CATEGORY_INPUT} component={CategoryInput} />
-      <Stack.Screen name={LOG_INPUT} component={LogInput} />
+      <ModalStack.Screen name={CATEGORY_LIST} component={TabRoutes} />
+      <ModalStack.Screen name={CATEGORY_INPUT} component={CategoryInput} />
+      <ModalStack.Screen name={LOG_INPUT} component={LogInput} />
     </ModalStack.Navigator>
+  );
+}
+function SignUpNavigator() {
+  return (
+    <ChooseLoginStack.Navigator initialRouteName={SIGN_UP}>
+      <ChooseLoginStack.Screen name={SIGN_UP} component={SignUp} />
+      <ChooseLoginStack.Screen name={SIGN_IN} component={SignIn} />
+    </ChooseLoginStack.Navigator>
   );
 }
 function switchingAuthStatus(status: UiContext.Status) {
   switch (status) {
     case UiContext.Status.UN_AUTHORIZED:
-      return <Stack.Screen name={SIGN_UP} component={SignUp} />;
+      return <Stack.Screen name={SIGN_UP} component={SignUpNavigator} />;
     case UiContext.Status.AUTHORIZED:
       return (
         <Stack.Screen name={CATEGORY_LIST} component={TabWithModalRoutes} />

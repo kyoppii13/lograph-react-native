@@ -1,10 +1,24 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { CATEGORY_LIST, CATEGORY_DETAIL } from "../../constants/path";
-import { CategoryList, CategoryDetail } from "../../components/pages";
+import {
+  CATEGORY_LIST,
+  CATEGORY_DETAIL,
+  LOG_INPUT,
+} from "../../constants/path";
+import { CategoryList, CategoryDetail, LogInput } from "../../components/pages";
 import { HeaderLeft } from "../Header";
 
 const Stack = createStackNavigator();
+const ModalStack = createStackNavigator();
+
+function ModalRoutes() {
+  return (
+    <ModalStack.Navigator mode="modal" headerMode="none">
+      <ModalStack.Screen name={CATEGORY_DETAIL} component={CategoryDetail} />
+      <ModalStack.Screen name={LOG_INPUT} component={LogInput} />
+    </ModalStack.Navigator>
+  );
+}
 
 function CategoryListNavigator() {
   return (
@@ -14,7 +28,7 @@ function CategoryListNavigator() {
         component={CategoryList}
         options={{ headerLeft: () => <HeaderLeft /> }}
       />
-      <Stack.Screen name={CATEGORY_DETAIL} component={CategoryDetail} />
+      <Stack.Screen name={CATEGORY_DETAIL} component={ModalRoutes} />
     </Stack.Navigator>
   );
 }
