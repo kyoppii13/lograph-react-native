@@ -28,10 +28,12 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import LogList from "./LogList";
 import CategoryList from "./CategoryList";
 import UserInfo from "./UserInfo";
+import { COLOR } from "../../constants/theme";
+import { headerStyle, headerTintColor } from "../Header";
 
 const Stack = createStackNavigator();
 const ModalStack = createStackNavigator();
-const ChooseLoginStack = createStackNavigator();
+const SignUpStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const CategoryListDrawer = createDrawerNavigator();
 const LogListDrawer = createDrawerNavigator();
@@ -51,9 +53,24 @@ const getActiveRouteName = (state: any): string => {
   }
   return route.name;
 };
+const cardStyle = {
+  backgroundColor: COLOR.MAIN,
+};
+const drawerStyle = {
+  backgroundColor: COLOR.MAIN,
+};
+const drawerContentOptions = {
+  activeTintColor: COLOR.PRIMARY,
+  inactiveTintColor: COLOR.WHITE,
+};
+
 function CategoryListWithDrawer() {
   return (
-    <CategoryListDrawer.Navigator initialRouteName={CATEGORY_LIST}>
+    <CategoryListDrawer.Navigator
+      initialRouteName={CATEGORY_LIST}
+      drawerStyle={drawerStyle}
+      drawerContentOptions={drawerContentOptions}
+    >
       <CategoryListDrawer.Screen
         name={CATEGORY_LIST}
         component={CategoryList}
@@ -64,7 +81,11 @@ function CategoryListWithDrawer() {
 }
 function LogListWithDrawer() {
   return (
-    <LogListDrawer.Navigator initialRouteName={LOG_LIST}>
+    <LogListDrawer.Navigator
+      initialRouteName={LOG_LIST}
+      drawerStyle={drawerStyle}
+      drawerContentOptions={drawerContentOptions}
+    >
       <LogListDrawer.Screen name={LOG_LIST} component={LogList} />
       <LogListDrawer.Screen name={USER_INFO} component={UserInfo} />
     </LogListDrawer.Navigator>
@@ -75,6 +96,13 @@ function TabRoutes() {
   return (
     <Tab.Navigator
       initialRouteName={CATEGORY_LIST}
+      tabBarOptions={{
+        inactiveTintColor: COLOR.WHITE,
+        activeTintColor: COLOR.PRIMARY,
+        style: {
+          backgroundColor: COLOR.MAIN,
+        },
+      }}
       screenOptions={(props: any) => {
         const routeName = getActiveRouteName(props.route.state);
         return {
@@ -89,7 +117,11 @@ function TabRoutes() {
 }
 function TabWithModalRoutes() {
   return (
-    <ModalStack.Navigator mode="modal" headerMode="none">
+    <ModalStack.Navigator
+      mode="modal"
+      headerMode="none"
+      screenOptions={{ cardStyle }}
+    >
       <ModalStack.Screen name={CATEGORY_LIST} component={TabRoutes} />
       <ModalStack.Screen name={CATEGORY_INPUT} component={CategoryInput} />
       <ModalStack.Screen name={LOG_INPUT} component={LogInput} />
@@ -98,10 +130,13 @@ function TabWithModalRoutes() {
 }
 function SignUpNavigator() {
   return (
-    <ChooseLoginStack.Navigator initialRouteName={SIGN_UP}>
-      <ChooseLoginStack.Screen name={SIGN_UP} component={SignUp} />
-      <ChooseLoginStack.Screen name={SIGN_IN} component={SignIn} />
-    </ChooseLoginStack.Navigator>
+    <SignUpStack.Navigator
+      initialRouteName={SIGN_UP}
+      screenOptions={{ cardStyle, headerStyle, headerTintColor }}
+    >
+      <SignUpStack.Screen name={SIGN_UP} component={SignUp} />
+      <SignUpStack.Screen name={SIGN_IN} component={SignIn} />
+    </SignUpStack.Navigator>
   );
 }
 function switchingAuthStatus(status: UiContext.Status) {
