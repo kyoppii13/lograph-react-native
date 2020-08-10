@@ -1,16 +1,17 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { Context, Status } from "../../../contexts/ui";
 import { useNavigation } from "@react-navigation/native";
 import { SIGN_IN, SIGN_UP } from "../../../constants/path";
 import { COLOR } from "../../../constants/theme";
-import { Button } from "../../atoms";
+import { Button, dismiss, TextField } from "../../atoms";
+import { useControlledComponent } from "../../../lib/hooks";
 
 const padding = 20;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLOR.MAIN,
+    padding: 16,
   },
   contentContainer: {
     flex: 1,
@@ -20,18 +21,37 @@ const styles = StyleSheet.create({
     paddingVertical: padding,
   },
   button: {
-    marginBottom: 40,
-    width: 300,
+    marginTop: 20,
+  },
+  text: {
+    marginVertical: 20,
   },
 });
 
 export default function SignUp() {
   const { navigate } = useNavigation();
   const { setApplicationState } = React.useContext(Context);
+  const mailAddress = useControlledComponent("");
+  const password = useControlledComponent("");
+
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <Text>SignUp</Text>
+    <TouchableWithoutFeedback onPress={dismiss}>
+      <View style={styles.container}>
+        <TextField
+          label="email"
+          value={mailAddress.value}
+          onChangeText={mailAddress.onChangeText}
+          style={styles.text}
+          autoCompleteType="email"
+        />
+        <TextField
+          label="password"
+          value={password.value}
+          onChangeText={password.onChangeText}
+          style={styles.text}
+          autoCompleteType="password"
+          secureTextEntry={true}
+        />
         <Button
           onPress={() => setApplicationState(Status.AUTHORIZED)}
           style={styles.button}
@@ -43,6 +63,6 @@ export default function SignUp() {
           label="Sign in"
         />
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
