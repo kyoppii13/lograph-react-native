@@ -134,8 +134,16 @@ function SignUpNavigator() {
       initialRouteName={SIGN_UP}
       screenOptions={{ cardStyle, headerStyle, headerTintColor }}
     >
-      <SignUpStack.Screen name={SIGN_UP} component={SignUp} />
-      <SignUpStack.Screen name={SIGN_IN} component={SignIn} />
+      <SignUpStack.Screen
+        name={SIGN_UP}
+        component={SignUp}
+        options={{ title: "SignUp" }}
+      />
+      <SignUpStack.Screen
+        name={SIGN_IN}
+        component={SignIn}
+        options={{ title: "SignIn" }}
+      />
     </SignUpStack.Navigator>
   );
 }
