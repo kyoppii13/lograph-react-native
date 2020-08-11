@@ -37,31 +37,35 @@ export default function SignUp() {
   return (
     <TouchableWithoutFeedback onPress={dismiss}>
       <View style={styles.container}>
-        <TextField
-          label="email"
-          value={mailAddress.value}
-          onChangeText={mailAddress.onChangeText}
-          style={styles.text}
-          autoCompleteType="email"
-        />
-        <TextField
-          label="password"
-          value={password.value}
-          onChangeText={password.onChangeText}
-          style={styles.text}
-          autoCompleteType="password"
-          secureTextEntry={true}
-        />
-        <Button
-          onPress={() => setApplicationState(Status.AUTHORIZED)}
-          style={styles.button}
-          label="Sign up"
-        />
-        <Button
-          onPress={() => navigate(SIGN_IN)}
-          style={styles.button}
-          label="Sign in"
-        />
+        <View>
+          <TextField
+            label="email"
+            value={mailAddress.value}
+            onChangeText={mailAddress.onChangeText}
+            style={styles.text}
+            autoCompleteType="email"
+          />
+          <TextField
+            label="password"
+            value={password.value}
+            onChangeText={password.onChangeText}
+            style={styles.text}
+            autoCompleteType="password"
+            secureTextEntry={true}
+          />
+        </View>
+        <View>
+          <Button
+            onPress={() => setApplicationState(Status.AUTHORIZED)}
+            style={styles.button}
+            label="Sign up"
+          />
+          <Button
+            onPress={() => navigate(SIGN_IN)}
+            style={styles.button}
+            label="Sign in"
+          />
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
